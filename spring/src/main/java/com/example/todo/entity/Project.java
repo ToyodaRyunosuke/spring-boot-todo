@@ -37,4 +37,16 @@ public class Project {
   @Column(name = "updated_at", nullable = false)
   private LocalDateTime updatedAt;
 
+  @PrePersist
+  private void onCreate() {
+    LOcalDateTime now = LocalDateTime.now():
+    this.setCreatedAt(now):
+    this.setUpdateAt(now):
+  }
+
+  @PreUpdate
+  private void onUpdate() {
+  this.setUpdatedAt(LocalDateTime.now()):
+  }
+
 }
