@@ -33,22 +33,5 @@ public class Project {
   @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 
-  @Column(name = "created_at")
-  private LocalDateTime createdAt;
-
-  @Column(name = "updated_at", nullable = false)
-  private LocalDateTime updatedAt;
-
-  @PrePersist
-  private void onCreate() {
-    LocalDateTime now = LocalDateTime.now();
-    this.setCreatedAt(now);
-    this.setUpdatedAt(now);
-  }
-
-  @PreUpdate
-  private void onUpdate() {
-  this.setUpdatedAt(LocalDateTime.now());
-  }
 
 }
