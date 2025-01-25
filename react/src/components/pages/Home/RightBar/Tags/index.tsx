@@ -50,4 +50,5 @@ const RightBarTags = ({ onChange }: Props) => {
   );
 };
 
+
 export default RightBarTags;
