@@ -1,6 +1,5 @@
 package com.example.todo.service.tasks;
 
-
 import org.springframework.stereotype.Service;
 import com.example.todo.dto.response.tasks.TaskBaseResponse;
 import com.example.todo.entity.Task;
@@ -30,7 +29,5 @@ public class TaskToggleService {
     // 更新したタスクをリターンする。
     return new TaskBaseResponse(toggledTask);
   }
+
 }
-
-
-

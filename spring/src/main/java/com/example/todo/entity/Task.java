@@ -1,13 +1,13 @@
 package com.example.todo.entity;
 
-
-import com.exmple.todo.enums.TaskPriority;
+import java.time.LocalDateTime;
+import com.example.todo.enums.TaskPriority;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @Entity
 @Table(name = "tasks")
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = false) // 親クラスの equals, hashCode を使わない（これを設定しないと警告が出る）
 public class Task extends BaseEntity {
 
   @Id
@@ -39,14 +39,21 @@ public class Task extends BaseEntity {
   @Column(length = 255, nullable = false)
   private String name;
 
-  // priority は、 0, 1, 2 のいずれかの値を持つ。
-  // TODO: このフィールドは、Enum型を使って定義するように修正予定。
+  /**
+   * @Enumerated EnumType.ORDINAL を指定することで、列挙型の値をデータベースに保存する際に、列挙型のインデックス（0, 1, 2, ...）を保存する。
+   */
   @Column(nullable = false, columnDefinition = "SMALLINT")
   @Enumerated(EnumType.ORDINAL)
   private TaskPriority priority = TaskPriority.MEDIUM;
 
   @Column(columnDefinition = "TEXT")
   private String memo;
+
+  @Column(name = "deadline_at")
+  private LocalDateTime deadlineAt;
+
+  @Column(name = "completed_at")
+  private LocalDateTime completedAt;
 
   /**
    * タスクが完了済みかどうかを返す。
@@ -65,6 +72,5 @@ public class Task extends BaseEntity {
   public void toggleCompleted() {
     this.setCompletedAt(this.isCompleted() ? null : LocalDateTime.now());
   }
-
 
 }

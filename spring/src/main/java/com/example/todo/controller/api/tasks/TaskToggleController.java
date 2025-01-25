@@ -30,4 +30,5 @@ public class TaskToggleController {
 
     return ResponseEntity.ok(response);
   }
+
 }
