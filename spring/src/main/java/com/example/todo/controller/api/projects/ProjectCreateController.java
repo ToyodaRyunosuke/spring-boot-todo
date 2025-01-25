@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.todo.dto.request.projects.ProjectCreateRequest;
-import com.example.todo.service.projects.ProjectCreateService;
 import com.example.todo.entity.Project;
+import com.example.todo.service.projects.ProjectCreateService;
 import jakarta.validation.Valid;
 
 /**
@@ -28,7 +28,6 @@ public class ProjectCreateController {
     this.projectCreateService = projectCreateService;
   }
 
-
   /**
    * @PostMapping HTTP POSTリクエストを受け取るメソッドに付与するアノテーション。このアノテーションが付与されたメソッドは、HTTP
    *              POSTリクエストを受け取るコントローラのメソッドとして動作する。
@@ -41,9 +40,6 @@ public class ProjectCreateController {
    */
   @PostMapping
   public ResponseEntity<Project> invoke(@Valid @RequestBody ProjectCreateRequest request) {
-    // TODO: Projectを作成するロジックを実装予定。
-    Project project = new Project();
-
     Project project = this.projectCreateService.invoke(request);
 
     return ResponseEntity.ok(project);
