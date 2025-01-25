@@ -35,4 +35,5 @@ public class TaskSpecification {
     // 更に、その project の id を取得している。
     return (root, query, builder) -> builder.equal(root.get("project").get("id"), projectId);
   }
+
 }

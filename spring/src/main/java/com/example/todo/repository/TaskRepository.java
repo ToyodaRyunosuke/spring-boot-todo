@@ -6,5 +6,5 @@ import com.example.todo.entity.Task;
 
 public interface TaskRepository
     extends JpaRepository<Task, Integer>, JpaSpecificationExecutor<Task> {
-}
 
+}

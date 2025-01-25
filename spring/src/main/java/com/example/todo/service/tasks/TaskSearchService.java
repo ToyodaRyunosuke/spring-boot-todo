@@ -21,8 +21,6 @@ public class TaskSearchService {
   }
 
   public List<TaskBaseResponse> invoke(TaskSearchRequest request) {
-    // TODO: 以下の処理だと、全てのタスクを取得してしまう。
-    // |___| 本来は、リクエストパラメータに応じて取得するタスクを絞り込む必要がある。
     TaskSpecification taskSpec = new TaskSpecification();
     Specification<Task> spec =
         Specification.where(taskSpec.projectIdEquals(request.getProjectId()));
@@ -33,10 +31,10 @@ public class TaskSearchService {
 
     // 引数に検索条件を指定することで、条件に合致する Task Entity のリストを取得する
     List<Task> tasks = this.taskRepository.findAll(spec, sort);
-    List<Task> tasks = this.taskRepository.findAll();
 
     // Task Entity のリストを、TaskBaseResponse のリストに変換して返す
     // .collect(Collectors.toList()) は、Stream の要素を List に変換するメソッド
     return tasks.stream().map(task -> new TaskBaseResponse(task)).collect(Collectors.toList());
   }
+
 }
