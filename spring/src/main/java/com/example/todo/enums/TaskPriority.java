@@ -39,4 +39,5 @@ public enum TaskPriority {
     return Arrays.stream(TaskPriority.values()).filter(priority -> priority.getValue() == value)
         .findFirst().orElseThrow(() -> new IllegalArgumentException("Unexpected value: " + value));
   }
+
 }
